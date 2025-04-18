@@ -96,6 +96,7 @@ freemem(void)
 {
   int n = 0;
   struct run *r;
+  
   acquire(&kmem.lock);
   
   for (r = kmem.freelist; r; r = r->next)
@@ -103,7 +104,7 @@ freemem(void)
 
   release(&kmem.lock);
 
-  return n * 4096;
+  return n * PGSIZE;
 }
 
 

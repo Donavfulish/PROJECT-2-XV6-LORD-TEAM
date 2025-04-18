@@ -5,4 +5,4 @@ struct sysinfo {
 };
 
 int
-systeminfo(uint64);
+systeminfo(uint64); 

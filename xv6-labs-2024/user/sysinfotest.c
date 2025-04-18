@@ -120,22 +120,16 @@ void testproc() {
   }
 }
 
+// tu code
 void loadavg() {
   struct sysinfo info;
   uint64 avgproc;
   sinfo(&info);
   
   avgproc = info.avgproc;
-
-    
-    if (avgproc < 0) {
-        printf("Error: Cannot retrieve system info\n");
-        return;
-    }
-
-    printf("Load average: %ld\n", avgproc);
-
+  printf("Load average: %ld\n", avgproc);
 }
+  
 void testbad() {
   int pid = fork();
   int xstatus;
@@ -165,7 +159,7 @@ main(int argc, char *argv[])
   testmem();
   testproc();
   // Challenge require
-  // loadavg();
+  loadavg();
   printf("sysinfotest: OK\n");
   exit(0);
 }
