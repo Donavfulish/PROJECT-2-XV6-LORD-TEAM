@@ -168,6 +168,7 @@ char* syscallnames[] = {
     // Ket qua system call trong thanh ghi a0
   
     num = p->trapframe->a7;
+    uint64 firstA0 = p->trapframe->a0;
     if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
       // Use num to lookup the system call function for num, call it,
       // and store its return value in p->trapframe->a0
@@ -181,14 +182,14 @@ char* syscallnames[] = {
     // Kiem tra bit o vi tri tracemask co duoc bat hay khong, neu duoc bat thi it ra thong tin process
     if (p->tracemask & (1 << num)) {
       // Make grade require
-      printf("%d: syscall %s -> %ld\n", p->pid, syscallnames[num], p->trapframe->a0);
+      //printf("%d: syscall %s -> %ld\n", p->pid, syscallnames[num], p->trapframe->a0);
 
       // Challenge require
-      // printf("%d: syscall %s (arg0=%ld, arg1=%ld, arg2=%ld, arg3=%ld, arg4=%ld, arg5=%ld) -> %ld\n",
-      //   p->pid, syscallnames[num],
-      //   p->trapframe->a0, p->trapframe->a1, p->trapframe->a2,
-      //   p->trapframe->a3, p->trapframe->a4, p->trapframe->a5,
-      //   p->trapframe->a0);  // Giá trị trả về nằm trong a0
+      printf("%d: syscall %s (arg0=%ld, arg1=%ld, arg2=%ld, arg3=%ld, arg4=%ld, arg5=%ld) -> %ld\n",
+        p->pid, syscallnames[num],
+        firstA0, p->trapframe->a1, p->trapframe->a2,
+        p->trapframe->a3, p->trapframe->a4, p->trapframe->a5,
+        p->trapframe->a0);  // Giá trị trả về nằm trong a0
     }
   }
   
